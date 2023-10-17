@@ -15,25 +15,36 @@ let displayValue = 0;
 const operate = (a, b, operator) => {
 	if (operator === "+") return add(a, b);
 	else if (operator === "-") return subtract(a, b);
-	else if (operator === "*") return multiply(a, b);
+	else if (operator === "x") return multiply(a, b);
 	else if (operator === "/") return divide(a, b);
 	else return;
 };
 
+const clearData = () => {
+	firstNumber = "";
+	secondNumber = "";
+	operator = "";
+	displayValue = 0;
+};
+
 const handleInput = (inputValue) => {
 	if (inputValue === "C") {
-		firstNumber = "";
-		secondNumber = "";
-		operator = "";
-		displayValue = 0;
+		clearData();
 		calculatorScreen.textContent = displayValue;
 	} else if (operator === "" && (inputValue >= 0 || inputValue <= 9)) {
 		firstNumber += inputValue;
 		calculatorScreen.textContent = firstNumber;
-	} else if (operator !== "" && (inputValue >= 0 || inputValue <= 9)) {
+	} else if (operator && (inputValue >= 0 || inputValue <= 9)) {
 		secondNumber += inputValue;
 		calculatorScreen.textContent = secondNumber;
-	} //else if ("+-/x".includes(inputValue))
+	} else if ("+-/x".includes(inputValue) && firstNumber) {
+		operator = inputValue;
+		calculatorScreen.textContent = 0;
+	} else if (inputValue === "=" && secondNumber) {
+		displayValue = operate(+firstNumber, +secondNumber, operator);
+		calculatorScreen.textContent = displayValue;
+		clearData();
+	}
 };
 
 calculatorButtons.forEach((button) => {
