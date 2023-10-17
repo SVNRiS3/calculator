@@ -16,7 +16,7 @@ const operate = (a, b, operator) => {
 	if (operator === "+") return add(a, b);
 	else if (operator === "-") return subtract(a, b);
 	else if (operator === "x") return multiply(a, b);
-	else if (operator === "/") return divide(a, b);
+	else if (operator === "/") return Math.round(divide(a, b));
 	else return;
 };
 
@@ -44,7 +44,11 @@ const handleInput = (inputValue) => {
 	if (inputValue === "C") {
 		clearData(true);
 		calculatorScreen.textContent = +displayValue;
-	} else if (operator === "" && (inputValue >= 0 || inputValue <= 9)) {
+	} else if (
+		displayValue === 0 &&
+		operator === "" &&
+		(inputValue >= 0 || inputValue <= 9)
+	) {
 		firstNumber += inputValue;
 		calculatorScreen.textContent = +firstNumber;
 	} else if (operator && (inputValue >= 0 || inputValue <= 9)) {

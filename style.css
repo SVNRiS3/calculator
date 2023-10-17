@@ -22,14 +22,14 @@ body {
 	align-items: center;
 	background-color: rgb(55, 55, 55);
 	color: darkgray;
-	font-size: 2em;
+	font-size: 1.8em;
 	font-weight: bold;
-	height: 80px;
+	height: 85px;
 }
 
 .calculator-button {
 	justify-content: center;
-	width: 80px;
+	width: 85px;
 	user-select: none;
 }
 
