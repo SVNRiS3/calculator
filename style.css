@@ -1,0 +1,39 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: darkgray;
+	height: 100vh;
+	display: flex;
+}
+
+.calculator {
+	margin: auto;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 5px;
+}
+
+.calculator > div {
+	display: flex;
+	align-items: center;
+	background-color: rgb(55, 55, 55);
+	color: darkgray;
+	font-size: 2em;
+	font-weight: bold;
+	height: 80px;
+}
+
+.calculator-button {
+	justify-content: center;
+	width: 80px;
+}
+
+.calculator-screen {
+	grid-column: 1 / 5;
+	padding: 20px;
+	justify-content: flex-end;
+}
