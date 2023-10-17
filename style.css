@@ -53,3 +53,8 @@ body {
 .calculator-button:active {
 	background-color: black;
 }
+
+.calculator-button:nth-child(4n + 1),
+.calculator-button:last-child {
+	background: #5b0000;
+}
