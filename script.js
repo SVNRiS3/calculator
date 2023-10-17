@@ -21,10 +21,19 @@ const operate = (a, b, operator) => {
 };
 
 const handleInput = (inputValue) => {
-	if (operator === "" && (inputValue >= 0 || inputValue <= 9)) {
+	if (inputValue === "C") {
+		firstNumber = "";
+		secondNumber = "";
+		operator = "";
+		displayValue = 0;
+		calculatorScreen.textContent = displayValue;
+	} else if (operator === "" && (inputValue >= 0 || inputValue <= 9)) {
 		firstNumber += inputValue;
 		calculatorScreen.textContent = firstNumber;
-	}
+	} else if (operator !== "" && (inputValue >= 0 || inputValue <= 9)) {
+		secondNumber += inputValue;
+		calculatorScreen.textContent = secondNumber;
+	} //else if ("+-/x".includes(inputValue))
 };
 
 calculatorButtons.forEach((button) => {
