@@ -54,6 +54,17 @@ const handleInput = (inputValue) => {
 	} else if (operator && (inputValue >= 0 || inputValue <= 9)) {
 		secondNumber += inputValue;
 		calculatorScreen.textContent = +secondNumber;
+	} else if (
+		"+-/x".includes(inputValue) &&
+		firstNumber &&
+		secondNumber &&
+		operator
+	) {
+		displayValue = operate(+firstNumber, +secondNumber, operator);
+		calculatorScreen.textContent = displayValue;
+		operator = inputValue;
+		firstNumber = displayValue;
+		secondNumber = "";
 	} else if ("+-/x".includes(inputValue) && firstNumber) {
 		operator = inputValue;
 		calculatorScreen.textContent = 0;
