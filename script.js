@@ -20,30 +20,46 @@ const operate = (a, b, operator) => {
 	else return;
 };
 
-const clearData = () => {
+const clearData = (clearDisplay) => {
 	firstNumber = "";
 	secondNumber = "";
 	operator = "";
-	displayValue = 0;
+	if (clearDisplay) {
+		displayValue = 0;
+	}
+};
+
+const handleErase = () => {
+	if (displayValue === 0 && !secondNumber) {
+		firstNumber = firstNumber.length === 1 ? "0" : firstNumber.slice(0, -1);
+		calculatorScreen.textContent = +firstNumber;
+	} else if (secondNumber) {
+		secondNumber =
+			secondNumber.length === 1 ? "0" : secondNumber.slice(0, -1);
+		calculatorScreen.textContent = +secondNumber;
+	}
 };
 
 const handleInput = (inputValue) => {
 	if (inputValue === "C") {
-		clearData();
-		calculatorScreen.textContent = displayValue;
+		clearData(true);
+		calculatorScreen.textContent = +displayValue;
 	} else if (operator === "" && (inputValue >= 0 || inputValue <= 9)) {
 		firstNumber += inputValue;
-		calculatorScreen.textContent = firstNumber;
+		calculatorScreen.textContent = +firstNumber;
 	} else if (operator && (inputValue >= 0 || inputValue <= 9)) {
 		secondNumber += inputValue;
-		calculatorScreen.textContent = secondNumber;
+		calculatorScreen.textContent = +secondNumber;
 	} else if ("+-/x".includes(inputValue) && firstNumber) {
 		operator = inputValue;
 		calculatorScreen.textContent = 0;
 	} else if (inputValue === "=" && secondNumber) {
 		displayValue = operate(+firstNumber, +secondNumber, operator);
-		calculatorScreen.textContent = displayValue;
-		clearData();
+		calculatorScreen.textContent = +displayValue;
+		clearData(false);
+		firstNumber = displayValue;
+	} else if (inputValue === "<-") {
+		handleErase();
 	}
 };
 
