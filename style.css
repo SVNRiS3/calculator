@@ -30,10 +30,20 @@ body {
 .calculator-button {
 	justify-content: center;
 	width: 80px;
+	user-select: none;
 }
 
 .calculator-screen {
 	grid-column: 1 / 5;
 	padding: 20px;
 	justify-content: flex-end;
+}
+
+.calculator-button:hover {
+	background-color: rgb(68, 68, 68);
+	cursor: pointer;
+}
+
+.calculator-button:active {
+	background-color: black;
 }
