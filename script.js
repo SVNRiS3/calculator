@@ -17,7 +17,7 @@ let displayValue = 0;
 const operate = (a, b, operator) => {
 	if (operator === "+") return add(a, b);
 	else if (operator === "-") return subtract(a, b);
-	else if (operator === "x") return multiply(a, b).toFixed(4);
+	else if ("xX*".includes(operator)) return multiply(a, b).toFixed(4);
 	else if (operator === "/") return divide(a, b).toFixed(4);
 	else return;
 };
@@ -72,7 +72,7 @@ const handleInput = (inputValue) => {
 		secondNumber += inputValue;
 		calculatorScreen.textContent = secondNumber;
 	} else if (
-		"+-/x".includes(inputValue) &&
+		"+-/xX*".includes(inputValue) &&
 		firstNumber &&
 		secondNumber &&
 		operator
@@ -82,15 +82,15 @@ const handleInput = (inputValue) => {
 		operator = inputValue;
 		firstNumber = displayValue;
 		secondNumber = "";
-	} else if ("+-/x".includes(inputValue) && firstNumber) {
+	} else if ("+-/xX*".includes(inputValue) && firstNumber) {
 		operator = inputValue;
 		calculatorScreen.textContent = 0;
-	} else if (inputValue === "=" && secondNumber) {
+	} else if ("=ENTER".includes(inputValue) && secondNumber) {
 		displayValue = operate(+firstNumber, +secondNumber, operator);
 		calculatorScreen.textContent = +displayValue;
 		clearData(false);
 		firstNumber = displayValue;
-	} else if (inputValue === "<-") {
+	} else if ("<-BACKSPACE".includes(inputValue)) {
 		handleErase();
 	} else if (inputValue === ".") {
 		handleFloat();
@@ -102,4 +102,8 @@ calculatorButtons.forEach((button) => {
 		const buttonContent = e.target.textContent;
 		handleInput(buttonContent);
 	});
+});
+
+document.addEventListener("keyup", (e) => {
+	handleInput(e.key.toUpperCase());
 });
