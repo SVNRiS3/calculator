@@ -1,3 +1,5 @@
+//TODO: SUPPORT FOR FLOATING POINT NUMBERS
+
 const calculatorButtons = document.querySelectorAll(".calculator-button");
 const calculatorScreen = document.querySelector(".calculator-screen");
 

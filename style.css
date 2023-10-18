@@ -41,7 +41,7 @@ body {
 }
 
 .calculator-equal {
-	grid-column: 1 / 5;
+	grid-column: 2 / 5;
 	width: 100%;
 }
 
@@ -55,6 +55,6 @@ body {
 }
 
 .calculator-button:nth-child(4n + 1),
-.calculator-button:last-child {
+.calculator-button:nth-last-child(-n + 4) {
 	background: #5b0000;
 }
