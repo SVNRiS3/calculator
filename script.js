@@ -18,7 +18,7 @@ const operate = (a, b, operator) => {
 	if (operator === "+") return add(a, b);
 	else if (operator === "-") return subtract(a, b);
 	else if (operator === "x") return multiply(a, b);
-	else if (operator === "/") return Math.round(divide(a, b));
+	else if (operator === "/") return divide(a, b).toFixed(4);
 	else return;
 };
 
