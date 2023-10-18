@@ -39,21 +39,21 @@ const checkCurrentNumber = () => {
 const handleErase = () => {
 	if (checkCurrentNumber() === 1) {
 		firstNumber = firstNumber.length === 1 ? "0" : firstNumber.slice(0, -1);
-		calculatorScreen.textContent = +firstNumber;
+		calculatorScreen.textContent = parseFloat(firstNumber);
 	} else if (checkCurrentNumber() === 2) {
 		secondNumber =
 			secondNumber.length === 1 ? "0" : secondNumber.slice(0, -1);
-		calculatorScreen.textContent = +secondNumber;
+		calculatorScreen.textContent = parseFloat(secondNumber);
 	}
 };
 
 const handleFloat = () => {
 	if (checkCurrentNumber() === 1 && !firstNumber.includes(".")) {
 		firstNumber += ".";
-		calculatorScreen.textContent = firstNumber;
+		calculatorScreen.textContent = parseFloat(firstNumber) + ".";
 	} else if (checkCurrentNumber() === 2 && !secondNumber.includes(".")) {
 		secondNumber += ".";
-		calculatorScreen.textContent = secondNumber;
+		calculatorScreen.textContent = parseFloat(secondNumber) + ".";
 	}
 };
 
@@ -67,10 +67,10 @@ const handleInput = (inputValue) => {
 		(inputValue >= 0 || inputValue <= 9)
 	) {
 		firstNumber += inputValue;
-		calculatorScreen.textContent = firstNumber;
+		calculatorScreen.textContent = parseFloat(firstNumber);
 	} else if (operator && (inputValue >= 0 || inputValue <= 9)) {
 		secondNumber += inputValue;
-		calculatorScreen.textContent = secondNumber;
+		calculatorScreen.textContent = parseFloat(secondNumber);
 	} else if (
 		"+-/xX*".includes(inputValue) &&
 		firstNumber &&
