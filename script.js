@@ -17,7 +17,7 @@ let displayValue = 0;
 const operate = (a, b, operator) => {
 	if (operator === "+") return add(a, b);
 	else if (operator === "-") return subtract(a, b);
-	else if (operator === "x") return multiply(a, b);
+	else if (operator === "x") return multiply(a, b).toFixed(4);
 	else if (operator === "/") return divide(a, b).toFixed(4);
 	else return;
 };
@@ -31,14 +31,29 @@ const clearData = (clearDisplay) => {
 	}
 };
 
+const checkCurrentNumber = () => {
+	if (displayValue === 0 && !secondNumber) return 1;
+	if (secondNumber) return 2;
+};
+
 const handleErase = () => {
-	if (displayValue === 0 && !secondNumber) {
+	if (checkCurrentNumber() === 1) {
 		firstNumber = firstNumber.length === 1 ? "0" : firstNumber.slice(0, -1);
 		calculatorScreen.textContent = +firstNumber;
-	} else if (secondNumber) {
+	} else if (checkCurrentNumber() === 2) {
 		secondNumber =
 			secondNumber.length === 1 ? "0" : secondNumber.slice(0, -1);
 		calculatorScreen.textContent = +secondNumber;
+	}
+};
+
+const handleFloat = () => {
+	if (checkCurrentNumber() === 1 && !firstNumber.includes(".")) {
+		firstNumber += ".";
+		calculatorScreen.textContent = firstNumber;
+	} else if (checkCurrentNumber() === 2 && !secondNumber.includes(".")) {
+		secondNumber += ".";
+		calculatorScreen.textContent = secondNumber;
 	}
 };
 
@@ -52,10 +67,10 @@ const handleInput = (inputValue) => {
 		(inputValue >= 0 || inputValue <= 9)
 	) {
 		firstNumber += inputValue;
-		calculatorScreen.textContent = +firstNumber;
+		calculatorScreen.textContent = firstNumber;
 	} else if (operator && (inputValue >= 0 || inputValue <= 9)) {
 		secondNumber += inputValue;
-		calculatorScreen.textContent = +secondNumber;
+		calculatorScreen.textContent = secondNumber;
 	} else if (
 		"+-/x".includes(inputValue) &&
 		firstNumber &&
@@ -77,6 +92,8 @@ const handleInput = (inputValue) => {
 		firstNumber = displayValue;
 	} else if (inputValue === "<-") {
 		handleErase();
+	} else if (inputValue === ".") {
+		handleFloat();
 	}
 };
 
